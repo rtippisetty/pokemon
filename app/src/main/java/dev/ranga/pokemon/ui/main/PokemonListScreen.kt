@@ -2,7 +2,6 @@ package dev.ranga.pokemon.ui.main
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,7 +10,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
@@ -23,7 +21,6 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
@@ -34,7 +31,8 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.ranga.pokemon.R
-import dev.ranga.pokemon.ui.common.AppTopBar
+import dev.ranga.pokemon.ui.common.LoadingView
+import dev.ranga.pokemon.ui.common.PokemonAppBar
 import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Composable
@@ -87,7 +85,7 @@ private fun PokemonListContent(
 
 @Composable
 private fun PokemonListTopBar() {
-    AppTopBar(
+    PokemonAppBar(
         title = stringResource(R.string.app_name),
     )
 }
@@ -128,16 +126,6 @@ private fun PokemonListView(
         listState = listState,
         onLoadMore = onNextPage
     )
-}
-
-@Composable
-private fun LoadingView(modifier: Modifier = Modifier) {
-    Column(
-        modifier = modifier,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        CircularProgressIndicator()
-    }
 }
 
 @Composable

@@ -16,7 +16,7 @@ import dev.ranga.pokemon.R
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppTopBar(
+internal fun PokemonAppBar(
     title: String,
     onBackEnabled: Boolean = false,
     onBackClick: () -> Unit = {},

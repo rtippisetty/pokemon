@@ -16,7 +16,7 @@ import dev.ranga.pokemon.R
 import dev.ranga.pokemon.ui.theme.PokemonTheme
 
 @Composable
-fun PokemonImageView(
+internal fun PokemonImageView(
     imageUrl: String,
     name: String,
     modifier: Modifier = Modifier
@@ -40,7 +40,7 @@ fun PokemonImageView(
         painter = painter,
         contentDescription = name,
         modifier = modifier.fillMaxSize(),
-        contentScale = ContentScale.Crop,
+        contentScale = ContentScale.Fit,
     )
 }
 
