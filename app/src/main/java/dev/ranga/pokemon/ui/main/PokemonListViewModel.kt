@@ -47,7 +47,7 @@ class PokemonListViewModel @Inject constructor(
                 val pokemons = getPokemonListUseCase.getPokemons(limit, offset)
                 updatePokemonList(pokemons.names)
             } catch (e: Exception) {
-                if(e is CancellationException) throw e
+                if (e is CancellationException) throw e
                 onError(e.message ?: "Unknown error")
             } finally {
                 _isLoading.value = false
@@ -56,7 +56,7 @@ class PokemonListViewModel @Inject constructor(
     }
 
     private suspend fun onError(message: String) {
-            _error.emit(message)
+        _error.emit(message)
     }
 
     private fun updatePokemonList(names: List<String>) {
