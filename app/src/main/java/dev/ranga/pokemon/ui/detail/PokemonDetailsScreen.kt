@@ -12,6 +12,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontFamily
@@ -32,6 +33,17 @@ import dev.ranga.pokemon.ui.theme.PokemonTheme
 fun PokemonDetailsScreen(onBack: () -> Unit) {
     val viewModel: PokemonDetailsViewModel = hiltViewModel()
     val state = viewModel.pokemonDetails.collectAsState()
+    PokemonDetailsContent(
+        state = state.value,
+        onBack = onBack
+    )
+}
+
+@Composable
+fun PokemonDetailsContent(
+    state: PokemonDetailsState,
+    onBack: () -> Unit
+) {
     Scaffold(
         topBar = {
             PokemonAppBar(
@@ -47,17 +59,26 @@ fun PokemonDetailsScreen(onBack: () -> Unit) {
                 .fillMaxSize()
         ) {
 
-            when (val value = state.value) {
+            when (val value = state) {
                 PokemonDetailsState.Loading -> {
-                    LoadingView(modifier = Modifier.fillMaxWidth())
+                    LoadingView(
+                        modifier = Modifier
+                            .testTag("LoadingView")
+                            .padding(PokemonTheme.dimensions.large)
+                            .fillMaxWidth()
+                    )
                 }
 
                 is PokemonDetailsState.Error -> {
-                    ErrorScreen(value.message)
+                    ErrorView(
+                        message = value.message,
+                        modifier = Modifier.testTag("ErrorView")
+                    )
                 }
 
                 is PokemonDetailsState.Success -> {
-                    PokemonDetailsScreenContent(
+                    PokemonDetailsView(
+                        modifier = Modifier.testTag("PokemonDetailsView"),
                         name = value.pokemonDetails.name,
                         height = value.pokemonDetails.height,
                         imageUrl = value.pokemonDetails.imageUrl
@@ -69,12 +90,15 @@ fun PokemonDetailsScreen(onBack: () -> Unit) {
 }
 
 @Composable
-private fun PokemonDetailsScreenContent(
+fun PokemonDetailsView(
+    modifier: Modifier = Modifier,
     name: String,
     height: Int,
     imageUrl: String?,
 ) {
-    Column {
+    Column(
+        modifier = modifier.fillMaxSize()
+    ) {
         HDivider()
         Text(
             text = "name: $name",
@@ -100,6 +124,7 @@ private fun PokemonDetailsScreenContent(
                 imageUrl = it,
                 name = name,
                 modifier = Modifier
+                    .testTag("PokemonImageView")
                     .size(PokemonTheme.dimensions.xxxxLarge)
                     .align(Alignment.CenterHorizontally)
             )
@@ -108,10 +133,10 @@ private fun PokemonDetailsScreenContent(
 }
 
 @Composable
-private fun ErrorScreen(message: String) {
+private fun ErrorView(message: String, modifier: Modifier = Modifier) {
     Text(
         text = message,
-        modifier = Modifier
+        modifier = modifier
             .padding(PokemonTheme.dimensions.large)
             .fillMaxWidth(),
         style = TextStyle(

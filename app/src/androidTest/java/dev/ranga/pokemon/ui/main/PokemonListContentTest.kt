@@ -11,7 +11,7 @@ import dev.ranga.pokemon.ui.theme.PokemonTheme
 import org.junit.Rule
 import org.junit.Test
 
-class PokemonListContentTest {
+internal class PokemonListContentTest {
     @get:Rule
     val composeTestRule = createComposeRule()
 
