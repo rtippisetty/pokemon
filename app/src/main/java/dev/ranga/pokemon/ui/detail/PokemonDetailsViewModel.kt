@@ -7,7 +7,6 @@ import dagger.hilt.android.lifecycle.HiltViewModel
 import dev.ranga.pokemon.api.GetPokemonDetailsUseCase
 import dev.ranga.pokemon.api.model.PokemonDetails
 import dev.ranga.pokemon.ui.detail.model.PokemonDetailsState
-import dev.ranga.pokemon.ui.detail.model.UIPokemonDetails
 import dev.ranga.pokemon.ui.navigation.PokemonDetailsDestination
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
@@ -18,7 +17,8 @@ import kotlin.coroutines.cancellation.CancellationException
 @HiltViewModel
 class PokemonDetailsViewModel @Inject constructor(
     savedStateHandle: SavedStateHandle,
-    private val getPokemonDetailsUseCase: GetPokemonDetailsUseCase
+    private val getPokemonDetailsUseCase: GetPokemonDetailsUseCase,
+    private val uiPokemonDetailsMapper: UIPokemonDetailsMapper
 ) : ViewModel() {
     private val name: String? = savedStateHandle[PokemonDetailsDestination::name.name]
 
@@ -30,7 +30,7 @@ class PokemonDetailsViewModel @Inject constructor(
     }
 
     private fun fetchPokemonDetails(name: String?) {
-        if (name == null) {
+        if (name.isNullOrBlank()) {
             onError("Invalid pokemon name")
             return
         }
@@ -48,11 +48,7 @@ class PokemonDetailsViewModel @Inject constructor(
 
     private fun onSuccess(pokemonDetails: PokemonDetails) {
         _pokemonDetails.value = PokemonDetailsState.Success(
-            UIPokemonDetails(
-                name = pokemonDetails.name,
-                imageUrl = pokemonDetails.spriteImageUrl,
-                height = pokemonDetails.height
-            )
+            uiPokemonDetailsMapper.map(pokemonDetails)
         )
     }
 
