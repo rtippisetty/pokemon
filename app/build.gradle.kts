@@ -1,7 +1,10 @@
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.kotlin.android)
-    alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.compose.compiler)
+    alias(libs.plugins.hilt.android)
+    alias(libs.plugins.google.devtools.ksp)
+    alias(libs.plugins.kotlinx.serialization)
 }
 
 android {
@@ -28,14 +31,28 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
-    }
-    kotlinOptions {
-        jvmTarget = "11"
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
     buildFeatures {
         compose = true
+        buildConfig = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.10"
+    }
+    packaging {
+        resources {
+            excludes += "/META-INF/{AL2.0,LGPL2.1}"
+        }
+    }
+    kotlin {
+        sourceSets.all {
+            languageSettings.enableLanguageFeature("ExplicitBackingFields")
+        }
+    }
+    testOptions {
+        unitTests.isIncludeAndroidResources = true
     }
 }
 
@@ -49,11 +66,40 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
+    implementation(libs.androidx.material3.android)
+    implementation(libs.androidx.material.icons.core)
+
+    //Hilt
+    implementation(libs.hilt.android)
+    implementation(libs.androidx.hilt.navigation.compose)
+    debugImplementation(libs.androidx.ui.tooling)
+    ksp(libs.hilt.compiler)
+
+    //Navigation
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.androidx.compose.runtime)
+    implementation(libs.coil.compose)
+
+    //Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit2.kotlinx.serialization.converter)
+    implementation(libs.okhttp)
+
+    //Kotlin serialization
+    implementation(libs.kotlinx.serialization.json)
+
+    //Test
+    testImplementation(libs.mockk)
+    testImplementation(libs.kotlinx.coroutines.test)
+    //Junit5
+    testImplementation(libs.junit.jupiter)
+    testImplementation( libs.junit.jupiter.api)
+    testRuntimeOnly(libs.junit.jupiter.engine)
+    testImplementation(libs.junit.jupiter.params)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
 }

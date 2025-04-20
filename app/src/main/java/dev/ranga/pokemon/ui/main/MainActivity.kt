@@ -1,4 +1,4 @@
-package dev.ranga.pokemon
+package dev.ranga.pokemon.ui.main
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
