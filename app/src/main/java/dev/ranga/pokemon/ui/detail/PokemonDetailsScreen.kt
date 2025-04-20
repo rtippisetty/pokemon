@@ -73,7 +73,7 @@ fun PokemonDetailsScreen(onBack: () -> Unit) {
 private fun PokemonDetailsScreenContent(
     name: String,
     height: Int,
-    imageUrl: String,
+    imageUrl: String?,
 ) {
     Column {
         HorizontalDivider(thickness = 1.dp, color = Color.Gray)
@@ -96,13 +96,15 @@ private fun PokemonDetailsScreenContent(
                 .fillMaxWidth(),
         )
         HorizontalDivider(thickness = 1.dp, color = Color.Gray)
-        PokemonImageView(
-            imageUrl = imageUrl,
-            name = name,
-            modifier = Modifier
-                .size(160.dp)
-                .align(Alignment.CenterHorizontally)
-        )
+        imageUrl?.let {
+            PokemonImageView(
+                imageUrl = it,
+                name = name,
+                modifier = Modifier
+                    .size(160.dp)
+                    .align(Alignment.CenterHorizontally)
+            )
+        }
     }
 }
 

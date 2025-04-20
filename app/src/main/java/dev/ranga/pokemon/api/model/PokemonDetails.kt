@@ -4,5 +4,5 @@ data class PokemonDetails(
     val id: Int,
     val name: String,
     val height: Int,
-    val spriteImageUrl: String,
+    val spriteImageUrl: String?,
 )

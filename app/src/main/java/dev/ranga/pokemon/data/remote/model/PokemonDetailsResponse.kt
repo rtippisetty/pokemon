@@ -8,11 +8,11 @@ data class PokemonDetailsResponse(
     val id: Int,
     val name: String,
     val height: Int,
-    val sprites: Sprite,
+    val sprites: PokemonSpritesResponse,
 )
 
 @Serializable
-data class Sprite(
+data class PokemonSpritesResponse(
     @SerialName("front_default")
-    val frontDefault: String,
+    val frontDefault: String?,
 )
