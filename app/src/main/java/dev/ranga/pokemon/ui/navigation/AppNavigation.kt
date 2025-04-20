@@ -49,7 +49,7 @@ fun AppNavHost(
 
         pokemonDetailsScreen(
             navigateToPokemonList = {
-                navController.navigate(PokemonListDestination)
+                navController.popBackStack()
             }
         )
     }
