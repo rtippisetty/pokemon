@@ -37,7 +37,7 @@ class PokemonDetailsViewModel @Inject constructor(
         viewModelScope.launch {
             _pokemonDetails.value = PokemonDetailsState.Loading
             try {
-                val pokemonDetails = getPokemonDetailsUseCase.get(name)
+                val pokemonDetails = getPokemonDetailsUseCase.details(name)
                 onSuccess(pokemonDetails)
             } catch (e: Exception) {
                 if (e is CancellationException) throw e

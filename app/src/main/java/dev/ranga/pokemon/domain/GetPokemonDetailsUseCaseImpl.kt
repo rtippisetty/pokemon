@@ -7,7 +7,7 @@ import javax.inject.Inject
 class GetPokemonDetailsUseCaseImpl @Inject constructor(
     private val repository: PokemonRepository
 ) : GetPokemonDetailsUseCase {
-    override suspend fun get(name: String): PokemonDetails {
+    override suspend fun details(name: String): PokemonDetails {
         return repository.getPokemonDetails(name)
     }
 }

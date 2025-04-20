@@ -44,7 +44,7 @@ class PokemonListViewModel @Inject constructor(
         viewModelScope.launch {
             _isLoading.value = true
             try {
-                val pokemons = getPokemonListUseCase.get(limit, offset)
+                val pokemons = getPokemonListUseCase.getPokemons(limit, offset)
                 updatePokemonList(pokemons.names)
             } catch (e: Exception) {
                 if(e is CancellationException) throw e
