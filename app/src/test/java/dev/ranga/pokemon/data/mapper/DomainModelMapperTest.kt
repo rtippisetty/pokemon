@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
 
-class DomainModelMapperTest {
+internal class DomainModelMapperTest {
 
     private lateinit var suit: DomainModelMapper
 
