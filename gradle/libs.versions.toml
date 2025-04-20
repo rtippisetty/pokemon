@@ -23,6 +23,8 @@ material3Android = "1.4.0-alpha12"
 composeRuntime = "0.1.0-dev14"
 coilCompose = "2.7.0"
 kotlinx-coroutines = "1.8.1"
+uiTestJunit4 = "1.7.8"
+uiTestManifest = "1.7.8"
 uiTooling = "1.7.8"
 
 [libraries]
@@ -33,6 +35,8 @@ androidx-activity-compose = { group = "androidx.activity", name = "activity-comp
 androidx-compose-bom = { group = "androidx.compose", name = "compose-bom", version.ref = "composeBom" }
 androidx-ui = { group = "androidx.compose.ui", name = "ui" }
 androidx-ui-graphics = { group = "androidx.compose.ui", name = "ui-graphics" }
+androidx-ui-test-junit4 = { module = "androidx.compose.ui:ui-test-junit4", version.ref = "uiTestJunit4" }
+androidx-ui-test-manifest = { module = "androidx.compose.ui:ui-test-manifest", version.ref = "uiTestManifest" }
 androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-tooling-preview" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
 androidx-material-icons-core = { group = "androidx.compose.material", name = "material-icons-core" }

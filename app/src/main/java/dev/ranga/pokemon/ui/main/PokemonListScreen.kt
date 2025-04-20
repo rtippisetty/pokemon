@@ -22,6 +22,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
@@ -51,7 +52,7 @@ fun PokemonListScreen(onPokemonSelected: (name: String) -> Unit) {
 }
 
 @Composable
-private fun PokemonListContent(
+fun PokemonListContent(
     pokemonList: List<String>,
     isLoading: Boolean,
     error: String?,
@@ -101,7 +102,9 @@ private fun PokemonListView(
     val listState = rememberLazyListState()
 
     LazyColumn(
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier
+            .fillMaxSize()
+            .testTag("PokemonListView"),
         state = listState,
         contentPadding = PaddingValues(PokemonTheme.dimensions.large),
         verticalArrangement = Arrangement.spacedBy(PokemonTheme.dimensions.small)
@@ -117,7 +120,9 @@ private fun PokemonListView(
         }
         if (isLoading) {
             item {
-                LoadingView(modifier = Modifier.fillMaxWidth())
+                LoadingView(modifier = Modifier
+                    .testTag("LoadingView")
+                    .fillMaxWidth())
             }
         }
     }
