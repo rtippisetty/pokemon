@@ -10,7 +10,6 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -27,12 +26,12 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.ranga.pokemon.R
+import dev.ranga.pokemon.ui.common.HDivider
 import dev.ranga.pokemon.ui.common.LoadingView
 import dev.ranga.pokemon.ui.common.PokemonAppBar
+import dev.ranga.pokemon.ui.theme.PokemonTheme
 import kotlinx.coroutines.flow.distinctUntilChanged
 
 @Composable
@@ -104,8 +103,8 @@ private fun PokemonListView(
     LazyColumn(
         modifier = modifier.fillMaxSize(),
         state = listState,
-        contentPadding = PaddingValues(16.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp)
+        contentPadding = PaddingValues(PokemonTheme.dimensions.large),
+        verticalArrangement = Arrangement.spacedBy(PokemonTheme.dimensions.small)
     ) {
         items(
             items = pokemonList,
@@ -135,7 +134,7 @@ private fun HandleListScroll(listState: LazyListState, onLoadMore: () -> Unit) {
             val lastVisibleItem = listState.layoutInfo.visibleItemsInfo.lastOrNull()
                 ?: return@derivedStateOf false
             val totalItems = listState.layoutInfo.totalItemsCount
-            lastVisibleItem.index >= totalItems - 2
+            lastVisibleItem.index >= totalItems - 6
         }
     }
     LaunchedEffect(shouldLoadMore) {
@@ -156,16 +155,16 @@ private fun PokemonListItem(
 ) {
     Text(
         modifier = Modifier
-            .padding(16.dp)
+            .padding(PokemonTheme.dimensions.large)
             .fillMaxWidth()
             .clickable { onClick(name) },
         text = name,
         style = TextStyle(
             color = Color.Black,
             textAlign = TextAlign.Left,
-            fontSize = 16.sp,
+            fontSize = PokemonTheme.dimensions.fontSizeLarge,
             fontWeight = FontWeight.Normal
         )
     )
-    HorizontalDivider(thickness = 1.dp, color = Color.Gray)
+    HDivider()
 }

@@ -5,7 +5,6 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -19,15 +18,15 @@ import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextDecoration
-import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.em
-import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import dev.ranga.pokemon.R
+import dev.ranga.pokemon.ui.common.HDivider
 import dev.ranga.pokemon.ui.common.LoadingView
 import dev.ranga.pokemon.ui.common.PokemonAppBar
 import dev.ranga.pokemon.ui.common.PokemonImageView
 import dev.ranga.pokemon.ui.detail.model.PokemonDetailsState
+import dev.ranga.pokemon.ui.theme.PokemonTheme
 
 @Composable
 fun PokemonDetailsScreen(onBack: () -> Unit) {
@@ -76,32 +75,32 @@ private fun PokemonDetailsScreenContent(
     imageUrl: String?,
 ) {
     Column {
-        HorizontalDivider(thickness = 1.dp, color = Color.Gray)
+        HDivider()
         Text(
             text = "name: $name",
             modifier = Modifier
-                .padding(16.dp)
+                .padding(PokemonTheme.dimensions.large)
                 .fillMaxWidth(),
             style = TextStyle(
                 color = Color.Black,
-                fontSize = 16.sp,
+                fontSize = PokemonTheme.dimensions.fontSizeLarge,
                 fontWeight = FontWeight.Medium
             )
         )
-        HorizontalDivider(thickness = 1.dp, color = Color.Gray)
+        HDivider()
         Text(
             text = "height: $height",
             modifier = Modifier
-                .padding(16.dp)
+                .padding(PokemonTheme.dimensions.large)
                 .fillMaxWidth(),
         )
-        HorizontalDivider(thickness = 1.dp, color = Color.Gray)
+        HDivider()
         imageUrl?.let {
             PokemonImageView(
                 imageUrl = it,
                 name = name,
                 modifier = Modifier
-                    .size(160.dp)
+                    .size(PokemonTheme.dimensions.xxxxLarge)
                     .align(Alignment.CenterHorizontally)
             )
         }
@@ -113,11 +112,11 @@ private fun ErrorScreen(message: String) {
     Text(
         text = message,
         modifier = Modifier
-            .padding(16.dp)
+            .padding(PokemonTheme.dimensions.large)
             .fillMaxWidth(),
         style = TextStyle(
             color = Color.Red,
-            fontSize = 16.sp,
+            fontSize = PokemonTheme.dimensions.fontSizeLarge,
             fontFamily = FontFamily.Monospace,
             fontWeight = FontWeight.W800,
             fontStyle = FontStyle.Italic,
