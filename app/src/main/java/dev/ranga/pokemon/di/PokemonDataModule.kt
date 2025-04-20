@@ -1,6 +1,5 @@
 package dev.ranga.pokemon.di
 
-import android.content.res.Resources
 import android.util.Log
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
 import dagger.Module
@@ -47,7 +46,7 @@ object PokemonDataModule {
 
     @Provides
     @Singleton
-    fun provideOkHttpClient(resources: Resources): OkHttpClient {
+    fun provideOkHttpClient(): OkHttpClient {
         return OkHttpClient.Builder()
             .addInterceptor(createLoggingInterceptor())
             .build()
