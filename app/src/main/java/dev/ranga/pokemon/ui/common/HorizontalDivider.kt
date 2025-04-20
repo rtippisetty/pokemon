@@ -9,6 +9,6 @@ import dev.ranga.pokemon.ui.theme.PokemonTheme
 fun HDivider() {
     HorizontalDivider(
         thickness = PokemonTheme.dimensions.extraTiny,
-        color = PokemonTheme.colorScheme.surface
+        color = PokemonTheme.colorScheme.primary
     )
 }
