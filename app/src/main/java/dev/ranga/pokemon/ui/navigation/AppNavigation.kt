@@ -10,17 +10,17 @@ import dev.ranga.pokemon.ui.main.PokemonListScreen
 import kotlinx.serialization.Serializable
 
 @Serializable
-object PokemonList
+object PokemonListDestination
 
 @Serializable
-data class PokemonDetails(
+data class PokemonDetailsDestination(
     val name: String
 )
 
 private fun NavGraphBuilder.pokemonListScreen(
     navigateToPokemonDetails: (name: String) -> Unit
 ) {
-    composable<PokemonList> {
+    composable<PokemonListDestination> {
         PokemonListScreen(navigateToPokemonDetails)
     }
 }
@@ -28,7 +28,7 @@ private fun NavGraphBuilder.pokemonListScreen(
 private fun NavGraphBuilder.pokemonDetailsScreen(
     navigateToPokemonList: () -> Unit
 ) {
-    composable<PokemonDetails> {
+    composable<PokemonDetailsDestination> {
         PokemonDetailsScreen(navigateToPokemonList)
     }
 }
@@ -39,17 +39,17 @@ fun AppNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = PokemonList
+        startDestination = PokemonListDestination
     ) {
         pokemonListScreen(
             navigateToPokemonDetails = { name ->
-                navController.navigate(PokemonDetails(name))
+                navController.navigate(PokemonDetailsDestination(name))
             }
         )
 
         pokemonDetailsScreen(
             navigateToPokemonList = {
-                navController.navigate(PokemonList)
+                navController.navigate(PokemonListDestination)
             }
         )
     }
