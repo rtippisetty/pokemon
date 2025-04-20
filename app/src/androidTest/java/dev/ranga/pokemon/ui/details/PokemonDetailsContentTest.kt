@@ -1,9 +1,10 @@
-package dev.ranga.pokemon.ui.detail
+package dev.ranga.pokemon.ui.details
 
 import androidx.compose.ui.test.assertIsDisplayed
 import androidx.compose.ui.test.hasText
 import androidx.compose.ui.test.junit4.createComposeRule
 import androidx.compose.ui.test.onNodeWithTag
+import dev.ranga.pokemon.ui.detail.PokemonDetailsContent
 import dev.ranga.pokemon.ui.detail.model.PokemonDetailsState
 import dev.ranga.pokemon.ui.detail.model.UIPokemonDetails
 import dev.ranga.pokemon.ui.theme.PokemonTheme
